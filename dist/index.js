@@ -23,4 +23,5 @@ class EjsLoader {
     }
 }
 exports.EjsLoader = EjsLoader;
+exports.default = EjsLoader;
 //# sourceMappingURL=index.js.map

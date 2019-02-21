@@ -1,34 +1,40 @@
 import * as fs from "fs";
 import * as ejs from "ejs";
-import { View, ViewLoader } from "sfn";
+import { ModuleLoader } from "alar";
 
-export interface EjsOptions {
-    /**
-     * Sets a specified encoding for loading the template file (default: `utf8`).
-     */
-    encoding?: string;
-    /** When `false` no debug instrumentation is compiled. */
-    compileDebug?: boolean;
-    /** Character to use with angle brackets for open/close. */
-    delimiter?: string;
-    /** Output generated function body. */
-    debug?: boolean;
-    /** When `true`, generated function is in strict mode. */
-    strict?: boolean;
-    /** 
-     * Remove all safe-to-remove whitespace, including leading and trailing 
-     * whitespace.
-     */
-    rmWhitespace?: boolean;
+export namespace EjsLoader {
+    export interface View {
+        render(data: { [name: string]: any }): string;
+    }
+
+    export interface Options {
+        /**
+         * Specifies encoding for loading the template (default: `utf8`).
+         */
+        encoding?: string;
+        /** When `false` no debug instrumentation is compiled. */
+        compileDebug?: boolean;
+        /** Character to use with angle brackets for open/close. */
+        delimiter?: string;
+        /** Outputs generated function body. */
+        debug?: boolean;
+        /** When `true`, generated function is in strict mode. */
+        strict?: boolean;
+        /** 
+         * Removes all safe-to-remove whitespace, including leading and trailing 
+         * whitespace.
+         */
+        rmWhitespace?: boolean;
+    }
 }
 
-export class EjsLoader implements ViewLoader {
+export class EjsLoader implements ModuleLoader {
     extesion = ".ejs";
-    cache: { [path: string]: View } = {};
+    cache: { [path: string]: EjsLoader.View } = {};
 
-    constructor(private options: EjsOptions = {}) { }
+    constructor(private options: EjsLoader.Options = {}) { }
 
-    load(path: string): View {
+    load(path: string) {
         if (this.cache[path]) {
             return this.cache[path];
         }
@@ -50,3 +56,5 @@ export class EjsLoader implements ViewLoader {
         delete this.cache[path];
     }
 }
+
+export default EjsLoader;
