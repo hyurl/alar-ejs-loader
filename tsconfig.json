@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2017",
+        "preserveConstEnums": true,
+        "rootDir": "src",
+        "outDir": "dist",
+        "newLine": "LF",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "pretty": true,
+        "removeComments": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false
+    },
+    "files": [
+        "src/index.ts",
+    ],
+    "exclude": [
+        "node_modules/*"
+    ]
+}
