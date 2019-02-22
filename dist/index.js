@@ -8,18 +8,17 @@ class EjsLoader {
         this.extesion = ".ejs";
         this.cache = {};
     }
-    load(path) {
-        if (this.cache[path]) {
-            return this.cache[path];
+    load(filename) {
+        if (this.cache[filename]) {
+            return this.cache[filename];
         }
-        let filename = path + this.extesion;
         let tpl = fs.readFileSync(filename, this.options.encoding || "utf8");
-        return this.cache[path] = {
+        return this.cache[filename] = {
             render: ejs.compile(tpl, Object.assign({}, this.options, { filename, cache: false, async: false }))
         };
     }
-    unload(path) {
-        delete this.cache[path];
+    unload(filename) {
+        delete this.cache[filename];
     }
 }
 exports.EjsLoader = EjsLoader;

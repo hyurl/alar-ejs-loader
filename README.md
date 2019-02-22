@@ -19,8 +19,8 @@ var view = new ModuleProxy("views", __dirname + "/views");
 view.setLoader(new EjsLoader());
 
 // assume there is hello.ejs file in views
-// every ejs module instance has a render method and accepts an argument as data
-// parsed to the template.
+// every ejs module instance (EjsLoader.View) has a render method and accepts an
+// argument as data parsed to the template.
 view.hello.instance().render({ /* data */ });
 ```
 

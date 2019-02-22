@@ -30,19 +30,18 @@ export namespace EjsLoader {
 
 export class EjsLoader implements ModuleLoader {
     extesion = ".ejs";
-    cache: { [path: string]: EjsLoader.View } = {};
+    cache: { [filename: string]: EjsLoader.View } = {};
 
     constructor(private options: EjsLoader.Options = {}) { }
 
-    load(path: string) {
-        if (this.cache[path]) {
-            return this.cache[path];
+    load(filename: string) {
+        if (this.cache[filename]) {
+            return this.cache[filename];
         }
 
-        let filename = path + this.extesion;
         let tpl = fs.readFileSync(filename, this.options.encoding || "utf8");
 
-        return this.cache[path] = {
+        return this.cache[filename] = {
             render: ejs.compile(tpl, {
                 ...this.options,
                 filename,
@@ -52,8 +51,8 @@ export class EjsLoader implements ModuleLoader {
         };
     }
 
-    unload(path: string) {
-        delete this.cache[path];
+    unload(filename: string) {
+        delete this.cache[filename];
     }
 }
 
