@@ -5,7 +5,7 @@ const ejs = require("ejs");
 class EjsLoader {
     constructor(options = {}) {
         this.options = options;
-        this.extesion = ".ejs";
+        this.extension = ".ejs";
         this.cache = {};
     }
     load(filename) {
