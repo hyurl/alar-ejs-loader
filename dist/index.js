@@ -14,7 +14,7 @@ class EjsLoader {
         }
         let tpl = fs.readFileSync(filename, this.options.encoding || "utf8");
         return this.cache[filename] = {
-            render: ejs.compile(tpl, Object.assign({}, this.options, { filename, cache: false, async: false }))
+            render: ejs.compile(tpl, Object.assign(Object.assign({}, this.options), { filename, cache: false, async: false }))
         };
     }
     unload(filename) {
