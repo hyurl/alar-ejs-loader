@@ -11,7 +11,7 @@ export namespace EjsLoader {
         /**
          * Specifies encoding for loading the template (default: `utf8`).
          */
-        encoding?: string;
+        encoding?: BufferEncoding;
         /** When `false` no debug instrumentation is compiled. */
         compileDebug?: boolean;
         /** Character to use with angle brackets for open/close. */
